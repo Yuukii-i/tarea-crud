@@ -1,0 +1,71 @@
+### 1. Obtener todos los autores (GET)
+GET http://localhost:3000/api/autores
+
+### 2. Crear un nuevo autor (POST)
+POST http://localhost:3000/api/autores
+Content-Type: application/json
+
+{
+    "nombre": "Isabel Allende",
+    "nacionalidad": "Chilena",
+    "fecha_nacimiento": "1942-08-02"
+}
+
+### 3. Obtener un autor específico por ID (GET)
+# (Cambia el número 1 del final por el ID que te devuelva el POST)
+GET http://localhost:3000/api/autores/2
+
+### 4. Actualizar un autor (PUT)
+# (Cambia el número 1 del final por el ID que quieras actualizar)
+PUT http://localhost:3000/api/autores/2
+Content-Type: application/json
+
+{
+    "nombre": "Isabel Allende Llona",
+    "nacionalidad": "Chilena",
+    "fecha_nacimiento": "1942-08-02"
+}
+
+### 5. Borrar un autor (DELETE)
+# (Cambia el número 1 del final por el ID que quieras borrar)
+DELETE http://localhost:3000/api/autores/2
+
+### ========================================
+### --- PRUEBAS PARA LA ENTIDAD LIBROS ---
+### ========================================
+
+### 1. Crear un nuevo libro (POST)
+# IMPORTANTE: Asegúrate de que el "autor_id" corresponda a un autor que realmente 
+# exista en tu base de datos (por ejemplo, el ID 1 que creamos antes).
+POST http://localhost:3000/api/libros
+Content-Type: application/json
+
+{
+    "titulo": "La casa de los espíritus",
+    "anio_publicacion": 1982,
+    "autor_id": 1
+}
+
+### 2. Obtener todos los libros (GET)
+# Al ejecutar esta petición, notarás la magia del "JOIN" de SQL:
+# Además de los datos del libro, la API te devolverá un campo llamado "nombre_autor".
+GET http://localhost:3000/api/libros
+
+### 3. Obtener un libro específico por ID (GET)
+# (Cambia el número 1 del final por el ID del libro que recién creaste)
+GET http://localhost:3000/api/libros/1
+
+### 4. Actualizar un libro (PUT)
+# (Cambia el número 1 de la URL por el ID del libro a actualizar)
+PUT http://localhost:3000/api/libros/1
+Content-Type: application/json
+
+{
+    "titulo": "La casa de los espíritus (Edición de Lujo)",
+    "anio_publicacion": 1982,
+    "autor_id": 1
+}
+
+### 5. Borrar un libro (DELETE)
+# (Cambia el número 1 del final por el ID del libro a borrar)
+DELETE http://localhost:3000/api/libros/1

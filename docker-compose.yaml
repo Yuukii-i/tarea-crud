@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # 1. El contenedor de la Base de Datos
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: libreria_db
+    ports:
+      - "5432:5432"
+    volumes:
+      # Esto guarda los datos para que no se borren si apagas Docker
+      - postgres_data:/var/lib/postgresql/data
+      # Esto ejecuta tu script SQL automáticamente la primera vez
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # 2. El contenedor de tu API Node.js
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      DB_USER: postgres
+      DB_PASSWORD: tu_contraseña
+      DB_NAME: libreria_db
+      DB_PORT: 5432
+      # ¡IMPORTANTE! Ya no es "localhost", ahora es el nombre del contenedor "db"
+      DB_HOST: db
+    depends_on:
+      - db
+    # Esto vincula tu código en tiempo real para que nodemon siga funcionando
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+volumes:
+  postgres_data:
