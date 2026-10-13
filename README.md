@@ -4,8 +4,8 @@ API REST con arquitectura por capas construida con Node.js, Express y PostgreSQL
 
 ## Requisitos previos
 
-- Git instalado.
-- Docker Desktop instalado y ejecutándose en segundo plano.
+- [Git](https://git-scm.com/downloads) instalado.
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y ejecutándo
 
 ## Instrucciones de ejecución
 
