@@ -1,17 +1,48 @@
-# CRUD API Rest - Autores y Libros 📚
+# CRUD API - Autores y Libros
 
-Esta es una API REST construida con **Node.js, Express y PostgreSQL**. Demuestra una arquitectura en capas (Routes, Controllers, Services) y usa SQL directo para el manejo de 2 entidades relacionadas (Autores y Libros).
+API REST con arquitectura por capas construida con Node.js, Express y PostgreSQL. El proyecto está "dockerizado" para que la base de datos y el servidor se levanten automáticamente sin instalaciones complejas.
 
-El proyecto está preparado para ejecutarse fácilmente con **Docker**, por lo que no necesitas instalar Node.js ni PostgreSQL en tu computadora para hacerlo funcionar.
+## Requisitos previos
 
-## 🛠️ Requisitos previos
-* [Git](https://git-scm.com/)
-* [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Asegúrate de que esté abierto y corriendo en segundo plano).
+- Git instalado.
+- Docker Desktop instalado y ejecutándose en segundo plano.
 
-## 🚀 Cómo ejecutar el proyecto (Paso a paso)
+## Instrucciones de ejecución
 
 **1. Clonar el repositorio**
-Abre tu consola y ejecuta:
 ```bash
 git clone [https://github.com/tu_usuario/tu_repositorio.git](https://github.com/tu_usuario/tu_repositorio.git)
 cd tu_repositorio
+```
+
+**2. Configurar variables de entorno**
+Crea un archivo llamado `.env` en la raíz del proyecto (al mismo nivel que `docker-compose.yml`) y pega este contenido:
+
+```env
+PORT=3000
+DB_USER=postgres
+DB_PASSWORD=tu_contraseña
+DB_HOST=db
+DB_PORT=5432
+DB_NAME=libreria_db
+```
+
+**3. Levantar el proyecto**
+Abre la consola en la raíz del proyecto y ejecuta el siguiente comando mágico (descargará todo, creará las tablas y encenderá la API):
+
+```bash
+docker-compose up --build
+```
+*(Nota: Si usas una versión muy nueva de Docker, el comando puede ser `docker compose up --build`)*
+
+## ¿Cómo probar la API?
+
+El servidor estará corriendo en `http://localhost:3000`. 
+Dentro del proyecto hay un archivo llamado `peticiones.http`. Si instalas la extensión **REST Client** en Visual Studio Code, podrás abrir ese archivo y hacer clic en "Send Request" para probar todo el CRUD directamente.
+
+## Apagar el proyecto
+
+Para detener el servidor y la base de datos, presiona `Ctrl + C` en la consola donde se está ejecutando, o escribe:
+```bash
+docker-compose down
+```
