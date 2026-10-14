@@ -1,48 +1,68 @@
-# CRUD API - Autores y Libros
+# 📚 CRUD API - Autores y Libros
 
-API REST con arquitectura por capas construida con Node.js, Express y PostgreSQL. El proyecto está "dockerizado" para que la base de datos y el servidor se levanten automáticamente sin instalaciones complejas.
+¡Bienvenido! Este es un proyecto de una API REST construida con Node.js, Express y PostgreSQL. Utiliza una arquitectura por capas (Routes, Controllers, Services) y está completamente "dockerizado" para que puedas ejecutarlo en cualquier computadora sin necesidad de instalar bases de datos o configuraciones complejas.
 
-## Requisitos previos
+## 🛠️ Requisitos previos
 
-- [Git](https://git-scm.com/downloads) instalado.
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) instalado y ejecutándo
+Para ejecutar este proyecto, solo necesitas tener instalados estos dos programas en tu computadora:
 
-## Instrucciones de ejecución
+1. [Git](https://git-scm.com/downloads) (Para descargar el código).
+2. [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Para ejecutar el servidor y la base de datos automáticamente). *Asegúrate de abrir Docker una vez instalado para que el motor esté activo en segundo plano.*
 
-**1. Clonar el repositorio**
+---
+
+## 🚀 Guía de Instalación Paso a Paso
+
+**Paso 1: Descargar el proyecto**  
+Abre tu terminal (Consola, CMD o PowerShell) y ejecuta estos comandos para descargar el código y entrar a la carpeta del proyecto:
+
 ```bash
-git clone [https://github.com/tu_usuario/tu_repositorio.git](https://github.com/tu_usuario/tu_repositorio.git)
-cd tu_repositorio
+git clone [https://github.com/Yuukii-i/tarea-crud.git](https://github.com/Yuukii-i/tarea-crud.git)
+cd tarea-crud
 ```
 
-**2. Configurar variables de entorno**
-Crea un archivo llamado `.env` en la raíz del proyecto (al mismo nivel que `docker-compose.yml`) y pega este contenido:
+**Paso 2: Configurar las contraseñas de la base de datos**  
+Por razones de seguridad, las contraseñas no se suben a internet. Debes crear un archivo nuevo llamado **exactamente** `.env` en la carpeta principal del proyecto (al mismo nivel que el archivo `docker-compose.yml`) y pegar este contenido dentro:
 
 ```env
 PORT=3000
 DB_USER=postgres
-DB_PASSWORD=tu_contraseña
+DB_PASSWORD=admin123
 DB_HOST=db
 DB_PORT=5432
 DB_NAME=libreria_db
 ```
+*(Nota: Puedes cambiar la contraseña `admin123` por la que tú prefieras, Docker la usará automáticamente para crear y proteger la base de datos).*
 
-**3. Levantar el proyecto**
-Abre la consola en la raíz del proyecto y ejecuta el siguiente comando mágico (descargará todo, creará las tablas y encenderá la API):
+**Paso 3: ¡Encender la aplicación!**  
+Verifica que la aplicación **Docker Desktop esté abierta**. Luego, en tu terminal (asegurándote de estar dentro de la carpeta `tarea-crud`), ejecuta este comando:
 
 ```bash
 docker-compose up --build
 ```
-*(Nota: Si usas una versión muy nueva de Docker, el comando puede ser `docker compose up --build`)*
+*(Si usas una versión muy reciente de Docker y el comando anterior falla, intenta quitarle el guion: `docker compose up --build`)*
 
-## ¿Cómo probar la API?
+¡Y listo! Docker se encargará de descargar PostgreSQL, configurar Node.js, crear las tablas SQL necesarias y encender la API. Todo de forma automática.
 
-El servidor estará corriendo en `http://localhost:3000`. 
-Dentro del proyecto hay un archivo llamado `peticiones.http`. Si instalas la extensión **REST Client** en Visual Studio Code, podrás abrir ese archivo y hacer clic en "Send Request" para probar todo el CRUD directamente.
+---
 
-## Apagar el proyecto
+## 🧪 ¿Cómo probar que funciona?
 
-Para detener el servidor y la base de datos, presiona `Ctrl + C` en la consola donde se está ejecutando, o escribe:
+Una vez que la consola muestre que el servidor está corriendo en `http://localhost:3000`, puedes probar la aplicación:
+
+1. Abre la carpeta del proyecto en **Visual Studio Code**.
+2. Ve a la pestaña de extensiones e instala una llamada **REST Client** (de Huachao Mao).
+3. Abre el archivo `peticiones.http` que viene incluido en el proyecto.
+4. Verás pequeños botones que dicen **"Send Request"** sobre cada petición (GET, POST, PUT, DELETE). Haz clic en ellos para probar la creación, lectura, actualización y eliminación de Autores y Libros.
+
+---
+
+## 🛑 Cómo apagar el proyecto
+
+Cuando termines de probar la aplicación, ve a la terminal donde está corriendo el proceso y presiona las teclas `Ctrl + C` para detenerlo. 
+
+Si deseas apagar y limpiar los contenedores de Docker por completo, escribe el siguiente comando:
+
 ```bash
 docker-compose down
 ```
